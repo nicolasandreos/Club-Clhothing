@@ -20,17 +20,19 @@ const CategorySection = () => {
   }, [categories]);
 
   return (
-    <div className="py-7.5 px-10 max-w-full grid grid-cols-2 grid-rows-[300px_250px_300px] gap-4">
+    <div className="w-full min-w-0 py-7.5 px-10 grid grid-cols-[1fr_1fr] grid-rows-[300px_250px_300px] gap-4">
       {categories.map((category, index) => (
         <div
           key={category.id}
-          className={`relative ${index === 2 ? "col-span-2" : ""}`}
+          className={`relative min-w-0 overflow-hidden rounded-2xl ${index === 2 ? "col-span-2" : ""}`}
         >
           <img
             src={category.imageUrl}
             alt={category.name}
-            className="rounded-2xl w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
+          {/* overlay escuro */}
+          <div className="absolute inset-0 bg-black/40"></div>
           <div className="absolute flex flex-col items-center justify-center gap-2.5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 py-2.5 px-7.5 bg-category-description rounded-lg border-primary border-2">
             <h3 className="text-2xl font-bold text-secondary">
               {category.name.charAt(0).toUpperCase() + category.name.slice(1)}

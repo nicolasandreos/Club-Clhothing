@@ -2,8 +2,9 @@
 
 @theme {
   --font-sans: "Poppins", sans-serif;
-  --color-bg-header: #212529;
-  --color-txt-primary: #F8F9FA;
+  --color-primary: #212529;
+  --color-secondary: #f8f9fa;
+  --color-category-description: #e9ecef73;
 }
 
 @layer base {

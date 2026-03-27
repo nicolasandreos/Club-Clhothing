@@ -8,8 +8,6 @@ const Header = () => {
         <h1 className="text-2xl font-bold">Header</h1>
         <ul className="flex gap-10 items-center font-medium">
           <HeaderItem text="Explorar" onClick={() => {}} />
-          <HeaderItem text="Login" onClick={() => {}} />
-          <HeaderItem text="Criar Conta" onClick={() => {}} />
           <HeaderItem
             text="Carrinho"
             onClick={() => {}}

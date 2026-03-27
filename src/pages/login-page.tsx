@@ -3,6 +3,7 @@ import { FiLogIn } from "react-icons/fi";
 import Button from "../components/button";
 import Input from "../components/input";
 import { useLoginForm } from "../form/hooks/use-login-form";
+import { Link } from "react-router";
 
 const LoginPage = () => {
   const {
@@ -59,6 +60,13 @@ const LoginPage = () => {
             disabled={isSubmitting}
           />
         </form>
+
+        <p className="text-sm flex items-center gap-1 justify-center text-black text-center mt-4">
+          Não tem uma conta?{" "}
+          <Link className="text-primary hover:underline" to="/signup">
+            Crie uma conta
+          </Link>
+        </p>
       </div>
     </div>
   );

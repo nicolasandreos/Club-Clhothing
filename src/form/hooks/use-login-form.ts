@@ -1,8 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema, type LoginFormData } from "../schema/login-schema";
-import { signInWithEmailAndPassword, type UserCredential } from "firebase/auth";
-import { auth } from "../../integrations/firebase/initialize";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  type UserCredential,
+} from "firebase/auth";
+import { auth, googleProvider } from "../../integrations/firebase/initialize";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -61,7 +65,18 @@ export const useLoginForm = () => {
   };
 
   const handleGoogleLogin = () => {
-    console.log("Login com Google");
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        toast.success(
+          "Usuário logado com sucesso com Google: " + result.user.email,
+        );
+        navigate("/");
+        return result.user;
+      })
+      .catch((error) => {
+        toast.error("Erro ao logar usuário com Google: " + error.message);
+        return null;
+      });
   };
 
   return {

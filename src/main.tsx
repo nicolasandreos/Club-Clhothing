@@ -6,6 +6,7 @@ import HomePage from "./pages/home-page.tsx";
 import LoginPage from "./pages/login-page.tsx";
 import SignupPage from "./pages/signup-page.tsx";
 import { Toaster } from "sonner";
+import { UserProvider } from "./contexts/user-context.tsx";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Toaster position="bottom-right" />
-    <RouterProvider router={router} />
+    <UserProvider>
+      <Toaster position="bottom-right" />
+      <RouterProvider router={router} />
+    </UserProvider>
   </StrictMode>,
 );

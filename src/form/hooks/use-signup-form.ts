@@ -29,10 +29,6 @@ export const useSignupForm = () => {
         newUser.email,
         newUser.password,
       );
-      console.log(
-        "Usuário criado com sucesso em Firebase Authentication: ",
-        userCredential.user,
-      );
       return userCredential.user;
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {

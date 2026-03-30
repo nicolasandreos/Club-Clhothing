@@ -3,4 +3,6 @@ export interface UserType {
   lastName: string;
   email: string;
   password: string;
+  accessToken?: string | null;
+  refreshToken?: string | null;
 }

@@ -14,7 +14,6 @@ const CategorySection = () => {
         (doc) => doc.data() as Category,
       );
       setCategories(categoriesData);
-      console.log(categories);
     };
     fetchCategories();
   }, [categories]);

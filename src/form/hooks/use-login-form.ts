@@ -10,9 +10,11 @@ import { auth, googleProvider } from "../../integrations/firebase/initialize";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import { useUser } from "../../contexts/user-context";
 
 export const useLoginForm = () => {
   const navigate = useNavigate();
+  const { getUserByEmail, loginUser } = useUser();
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -37,10 +39,14 @@ export const useLoginForm = () => {
         "Usuário logado com sucesso no email: " + userCredential.user.email,
       );
       navigate("/");
-      return userCredential.user;
+      const user = await getUserByEmail(userCredential.user.email || "");
+      if (user) {
+        loginUser(user);
+        return user;
+      }
+      return null;
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
-        console.log(error.code);
         switch (error.code) {
           case "auth/invalid-credential":
             toast.error("Credenciais inválidas");

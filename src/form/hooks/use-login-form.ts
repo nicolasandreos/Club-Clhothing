@@ -11,6 +11,9 @@ import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useUser } from "../../contexts/user-context";
+import type { UserType } from "../../../types/user-type";
+import { addUserToFireStore } from "./use-signup-form";
+import { v4 as uuidv4 } from "uuid";
 
 export const useLoginForm = () => {
   const navigate = useNavigate();
@@ -72,10 +75,29 @@ export const useLoginForm = () => {
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleProvider)
-      .then((result) => {
+      .then(async (result) => {
         toast.success(
           "Usuário logado com sucesso com Google: " + result.user.email,
         );
+        console.log(result);
+        const user = await getUserByEmail(result.user.email || "");
+        if (!user) {
+          const newUser: UserType = {
+            firstName: result.user.displayName?.split(" ")[0] || "",
+            lastName: result.user.displayName?.split(" ")[1] || "",
+            email: result.user.email || "",
+            password: "",
+          };
+
+          const user = await addUserToFireStore(newUser, uuidv4() || "");
+          if (!user) {
+            return null;
+          }
+          loginUser(user);
+          navigate("/");
+          return user;
+        }
+        loginUser(user);
         navigate("/");
         return result.user;
       })

@@ -9,6 +9,54 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { toast } from "sonner";
 import { FirebaseError } from "firebase/app";
 
+export const addUserToFirebaseAuthentication = async (newUser: UserType) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      newUser.email,
+      newUser.password,
+    );
+    return userCredential.user;
+  } catch (error: unknown) {
+    if (error instanceof FirebaseError) {
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          toast.error("Email já em uso");
+          return null;
+        case "auth/invalid-email":
+          toast.error("Email inválido");
+          return null;
+        case "auth/weak-password":
+          toast.error("Senha fraca");
+          return null;
+      }
+      toast.error(
+        "Erro ao criar usuário em Firebase Authentication: " + error.message,
+      );
+      return null;
+    }
+  }
+};
+
+export const addUserToFireStore = async (
+  newUser: UserType,
+  userId: string,
+): Promise<UserType | null> => {
+  try {
+    await addDoc(collection(db, "user"), {
+      userId: userId,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      password: newUser.password,
+    });
+    return newUser;
+  } catch (error) {
+    toast.error("Erro ao criar usuário em Firestore: " + error);
+    return null;
+  }
+};
+
 export const useSignupForm = () => {
   const navigate = useNavigate();
   const form = useForm<SignupFormData>({
@@ -21,51 +69,6 @@ export const useSignupForm = () => {
       confirmPassword: "",
     },
   });
-
-  const addUserToFirebaseAuthentication = async (newUser: UserType) => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        newUser.email,
-        newUser.password,
-      );
-      return userCredential.user;
-    } catch (error: unknown) {
-      if (error instanceof FirebaseError) {
-        switch (error.code) {
-          case "auth/email-already-in-use":
-            toast.error("Email já em uso");
-            return null;
-          case "auth/invalid-email":
-            toast.error("Email inválido");
-            return null;
-          case "auth/weak-password":
-            toast.error("Senha fraca");
-            return null;
-        }
-        toast.error(
-          "Erro ao criar usuário em Firebase Authentication: " + error.message,
-        );
-        return null;
-      }
-    }
-  };
-
-  const addUserToFireStore = async (newUser: UserType, userId: string) => {
-    try {
-      const docRef = await addDoc(collection(db, "user"), {
-        userId: userId,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        email: newUser.email,
-        password: newUser.password,
-      });
-      console.log("Usuário criado com sucesso em Firestore: ", docRef.id);
-    } catch (error) {
-      toast.error("Erro ao criar usuário em Firestore: " + error);
-      return null;
-    }
-  };
 
   const onSubmit = async (data: SignupFormData) => {
     const newUser: UserType = {

@@ -41,13 +41,14 @@ export const useLoginForm = () => {
       toast.success(
         "Usuário logado com sucesso no email: " + userCredential.user.email,
       );
-      navigate("/");
       const user = await getUserByEmail(userCredential.user.email || "");
       if (user) {
         loginUser(user);
-        return user;
+        navigate("/");
+        return;
       }
-      return null;
+      toast.error("Usuário não encontrado");
+      return;
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         switch (error.code) {

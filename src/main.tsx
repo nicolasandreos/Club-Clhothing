@@ -7,6 +7,7 @@ import LoginPage from "./pages/login-page.tsx";
 import SignupPage from "./pages/signup-page.tsx";
 import { Toaster } from "sonner";
 import { UserProvider } from "./contexts/user-context.tsx";
+import CategoryPage from "./pages/category-page.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignupPage />,
+  },
+  {
+    path: "/category/:categoryId",
+    element: <CategoryPage />,
   },
 ]);
 

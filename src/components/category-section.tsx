@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import type Category from "../../types/category-type";
+import type { CategoryType } from "../../types/category-type";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../integrations/firebase/initialize.ts";
+import { useNavigate } from "react-router";
 
 const CategorySection = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-
+  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchCategories = async () => {
       const categoriesRef = collection(db, "categories");
       const categoriesSnapshot = await getDocs(categoriesRef);
       const categoriesData = categoriesSnapshot.docs.map(
-        (doc) => doc.data() as Category,
+        (doc) => doc.data() as CategoryType,
       );
       setCategories(categoriesData);
     };
@@ -22,6 +23,7 @@ const CategorySection = () => {
     <div className="w-full min-w-0 py-7.5 px-10 grid grid-cols-[1fr_1fr] grid-rows-[300px_250px_300px] gap-4">
       {categories.map((category, index) => (
         <div
+          onClick={() => navigate(`/category/${category.id}`)}
           key={category.id}
           className={`relative min-w-0 overflow-hidden rounded-2xl ${index === 2 ? "col-span-2" : ""}`}
         >

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../integrations/firebase/initialize";
 import type { CategoryType } from "../../types/category-type";
+import { ChevronLeft } from "lucide-react";
+import { capitalizeFirstLetter } from "../lib/utils";
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
@@ -24,14 +26,21 @@ const CategoryPage = () => {
   }, [categoryId]);
 
   return (
-    <div>
+    <>
       <Header />
-      {category && (
-        <div>
-          <h1>{category.name}</h1>
+      <div className="w-full h-full py-5 px-10">
+        <div className="flex items-center gap-1 w-full">
+          <ChevronLeft className="text-xl" />
+          {category && (
+            <div>
+              <h1 className="text-tertiary font-semibold text-xl">
+                {capitalizeFirstLetter(category.name)}
+              </h1>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import SignupPage from "./pages/signup-page.tsx";
 import { Toaster } from "sonner";
 import { UserProvider } from "./contexts/user-context.tsx";
 import CategoryPage from "./pages/category-page.tsx";
+import ExplorePage from "./pages/explore-page.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/category/:categoryId",
     element: <CategoryPage />,
+  },
+  {
+    path: "/explore",
+    element: <ExplorePage />,
   },
 ]);
 

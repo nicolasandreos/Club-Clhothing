@@ -1,9 +1,11 @@
 import { ShoppingCart } from "lucide-react";
 import HeaderItem from "./header-item";
 import { useNavigate } from "react-router";
+import { useUser } from "../contexts/user-context";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { signOutUser } = useUser();
   return (
     <header className="bg-primary text-secondary w-full py-4 px-5">
       <div className="justify-between flex">
@@ -11,6 +13,7 @@ const Header = () => {
           CLUB CLOTHING
         </h1>
         <ul className="flex gap-10 items-center font-medium">
+          <HeaderItem text="Sair" onClick={() => signOutUser()} />
           <HeaderItem text="Explorar" onClick={() => navigate("/explore")} />
           <HeaderItem
             text="Carrinho"

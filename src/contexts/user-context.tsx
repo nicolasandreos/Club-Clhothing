@@ -8,6 +8,7 @@ export interface UserContextInterface {
   user: UserType | null;
   loading: boolean;
   loginUser: (user: UserType) => void;
+  signOutUser: () => void;
   getUserByEmail: (email: string) => Promise<UserType | null>;
 }
 
@@ -15,6 +16,7 @@ export const UserContext = createContext<UserContextInterface>({
   user: null,
   loading: true,
   loginUser: () => {},
+  signOutUser: () => {},
   getUserByEmail: () => Promise.resolve(null),
 });
 
@@ -24,6 +26,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const loginUser = (user: UserType) => {
     setUser(user);
+  };
+
+  const signOutUser = () => {
+    setUser(null);
   };
 
   const getUserByEmail = async (email: string): Promise<UserType | null> => {
@@ -48,7 +54,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const contextValue = useMemo(() => {
-    return { user, loading, loginUser, getUserByEmail };
+    return { user, loading, loginUser, getUserByEmail, signOutUser };
   }, [user, loading]);
 
   return (

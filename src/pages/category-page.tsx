@@ -6,8 +6,8 @@ import { db } from "../integrations/firebase/initialize";
 import type { CategoryType } from "../../types/category-type";
 import { ChevronLeft } from "lucide-react";
 import { capitalizeFirstLetter } from "../lib/utils";
-import ProductCard from "../components/product-card";
 import { useNavigate } from "react-router";
+import ProductsSection from "../components/products-section";
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
@@ -31,7 +31,7 @@ const CategoryPage = () => {
     <>
       <Header />
       <div className="w-full h-full py-5 px-10">
-        <div className="flex items-center gap-1 w-full">
+        <div className="flex items-center gap-1 w-full mb-8">
           <ChevronLeft
             onClick={() => navigate(-1)}
             className="text-2xl cursor-pointer hover:bg-secondary"
@@ -44,11 +44,7 @@ const CategoryPage = () => {
             </div>
           )}
         </div>
-        <div className="grid grid-cols-4 gap-8 mt-8">
-          {category?.products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <ProductsSection products={category?.products || []} />
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import Button from "./button";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "../contexts/cart-context";
 import { useEffect } from "react";
+import { formattedPrice } from "../lib/utils";
 
 type CartSheetProps = {
   isOpen: boolean;
@@ -10,7 +11,7 @@ type CartSheetProps = {
 };
 
 const CartSheet = ({ isOpen, onClose }: CartSheetProps) => {
-  const { products } = useCart();
+  const { products, totalPrice } = useCart();
   const hasProducts = products.length > 0;
 
   useEffect(() => {
@@ -64,6 +65,12 @@ const CartSheet = ({ isOpen, onClose }: CartSheetProps) => {
               <p className="text-gray-500 text-lg">Seu carrinho está vazio</p>
             </div>
           )}
+        </div>
+
+        <div className="w-full px-6">
+          <p className="text-xl font-semibold text-gray-900">
+            Total: {formattedPrice(totalPrice)}
+          </p>
         </div>
 
         <div className="p-6 border-t border-gray-200">

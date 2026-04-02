@@ -7,6 +7,7 @@ import LoginPage from "./pages/login-page.tsx";
 import SignupPage from "./pages/signup-page.tsx";
 import { Toaster } from "sonner";
 import { UserProvider } from "./contexts/user-context.tsx";
+import { CartProvider } from "./contexts/cart-context.tsx";
 import CategoryPage from "./pages/category-page.tsx";
 import ExplorePage from "./pages/explore-page.tsx";
 
@@ -36,8 +37,10 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <UserProvider>
-      <Toaster position="bottom-right" />
-      <RouterProvider router={router} />
+      <CartProvider>
+        <Toaster position="bottom-right" />
+        <RouterProvider router={router} />
+      </CartProvider>
     </UserProvider>
   </StrictMode>,
 );

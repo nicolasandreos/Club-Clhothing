@@ -4,6 +4,7 @@ import { ShoppingCart } from "lucide-react";
 import { useCart } from "../contexts/cart-context";
 import { useEffect } from "react";
 import { formattedPrice } from "../lib/utils";
+import CartLineItem from "./cart-line-item";
 
 type CartSheetProps = {
   isOpen: boolean;
@@ -56,9 +57,13 @@ const CartSheet = ({ isOpen, onClose }: CartSheetProps) => {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="min-h-0 flex-1 overflow-y-auto p-6">
           {hasProducts ? (
-            <div>{/* Produtos serão exibidos aqui */}</div>
+            <div className="flex flex-col gap-3">
+              {products.map((item) => (
+                <CartLineItem key={item.id} item={item} />
+              ))}
+            </div>
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <ShoppingCart className="w-16 h-16 text-gray-300 mb-4" />

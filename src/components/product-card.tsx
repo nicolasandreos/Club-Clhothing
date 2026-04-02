@@ -1,5 +1,6 @@
 import type { ProductType } from "../../types/product-type";
 import { ShoppingCart } from "lucide-react";
+import { toast } from "sonner";
 import { useCart } from "../contexts/cart-context";
 import { formattedPrice } from "../lib/utils";
 
@@ -13,6 +14,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const handleAddProductToCart = () => {
     addProductToCart(product);
+    toast.success(`${product.name} foi adicionado ao carrinho.`);
   };
 
   return (

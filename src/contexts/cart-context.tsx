@@ -21,20 +21,17 @@ export const CartContext = createContext<CartContextType>({
 });
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [products, setProducts] = useState<Cart[]>([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const products = localStorage.getItem("products");
-      if (products) {
-        setProducts(JSON.parse(products));
-      }
-    };
-    fetchProducts();
-  }, []);
+  const [products, setProducts] = useState<Cart[]>(() => {
+    const products = localStorage.getItem("products");
+    if (products) {
+      return JSON.parse(products);
+    }
+    return [];
+  });
 
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
+    console.log("mudou");
   }, [products]);
 
   const productsQuantity = useMemo(() => {

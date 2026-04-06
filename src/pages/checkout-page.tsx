@@ -4,9 +4,23 @@ import Header from "../components/header";
 import { formattedPrice } from "../lib/utils";
 import { ShoppingCart } from "lucide-react";
 import Button from "../components/button";
+import axios from "axios";
 
 const CheckoutPage = () => {
   const { products, totalPrice } = useCart();
+
+  const handleCheckout = async () => {
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/create-checkout-session`,
+        { products },
+      );
+      window.location.href = data.url;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -29,7 +43,7 @@ const CheckoutPage = () => {
               text="Finalizar Compra"
               icon={<ShoppingCart />}
               onClick={() => {
-                console.log("STRIPE");
+                handleCheckout();
               }}
             />
           </div>

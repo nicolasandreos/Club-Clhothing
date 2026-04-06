@@ -5,6 +5,7 @@ import { useCart } from "../contexts/cart-context";
 import { useEffect } from "react";
 import { formattedPrice } from "../lib/utils";
 import CartLineItem from "./cart-line-item";
+import { useNavigate } from "react-router";
 
 type CartSheetProps = {
   isOpen: boolean;
@@ -14,6 +15,7 @@ type CartSheetProps = {
 const CartSheet = ({ isOpen, onClose }: CartSheetProps) => {
   const { products, totalPrice } = useCart();
   const hasProducts = products.length > 0;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isOpen) {
@@ -80,11 +82,11 @@ const CartSheet = ({ isOpen, onClose }: CartSheetProps) => {
 
         <div className="p-6 border-t border-gray-200">
           <Button
-            text="Finalizar Compra"
+            text="Ir para checkout"
             icon={<ShoppingCart />}
             disabled={!hasProducts}
             onClick={() => {
-              console.log("Finalizar compra");
+              navigate("/checkout");
             }}
           />
         </div>

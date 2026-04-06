@@ -10,6 +10,7 @@ import { UserProvider } from "./contexts/user-context.tsx";
 import { CartProvider } from "./contexts/cart-context.tsx";
 import CategoryPage from "./pages/category-page.tsx";
 import ExplorePage from "./pages/explore-page.tsx";
+import CheckoutPage from "./pages/checkout-page.tsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/explore",
     element: <ExplorePage />,
+  },
+  {
+    path: "/checkout",
+    element: <CheckoutPage />,
   },
 ]);
 

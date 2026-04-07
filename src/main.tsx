@@ -11,6 +11,7 @@ import { CartProvider } from "./contexts/cart-context.tsx";
 import CategoryPage from "./pages/category-page.tsx";
 import ExplorePage from "./pages/explore-page.tsx";
 import CheckoutPage from "./pages/checkout-page.tsx";
+import PaymentConfirmationPage from "./pages/payment-confirmation-page.tsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <CheckoutPage />,
+  },
+  {
+    path: "/payment-confirmation",
+    element: <PaymentConfirmationPage />,
   },
 ]);
 

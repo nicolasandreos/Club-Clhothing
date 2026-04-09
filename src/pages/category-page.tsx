@@ -30,8 +30,8 @@ const CategoryPage = () => {
   return (
     <>
       <Header />
-      <div className="w-full h-full py-5 px-10">
-        <div className="flex items-center gap-1 w-full mb-8">
+      <div className="w-full h-full py-5 px-4 sm:px-6 md:px-10">
+        <div className="flex items-center gap-1 w-full mb-6 md:mb-8">
           <ChevronLeft
             onClick={() => navigate(-1)}
             className="text-2xl cursor-pointer hover:bg-secondary"

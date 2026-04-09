@@ -24,7 +24,7 @@ const ExplorePage = () => {
   return (
     <>
       <Header />
-      <div className="w-full h-full py-5 px-10">
+      <div className="w-full h-full py-5 px-4 sm:px-6 md:px-10">
         {categories.map((category) => (
           <div className="flex flex-col gap-2" key={category.id}>
             <h2 className="text-tertiary font-semibold text-xl">

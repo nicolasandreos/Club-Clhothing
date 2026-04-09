@@ -40,7 +40,7 @@ const CartSheet = ({ isOpen, onClose }: CartSheetProps) => {
       )}
 
       <div
-        className={`fixed right-0 bg-white z-50 w-full max-w-md shadow-2xl transition-transform duration-300 ease-in-out flex flex-col ${
+        className={`fixed right-0 bg-white z-50 w-full sm:max-w-md shadow-2xl transition-transform duration-300 ease-in-out flex flex-col ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{

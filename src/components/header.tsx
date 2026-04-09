@@ -12,18 +12,21 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-primary text-secondary w-full py-4 px-5">
-        <div className="justify-between flex">
-          <h1 className="text-2xl font-bold" onClick={() => navigate("/")}>
+      <header className="bg-primary text-secondary w-full py-4 px-4 sm:px-5">
+        <div className="justify-between flex items-center">
+          <h1
+            className="text-lg sm:text-2xl font-bold cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             CLUB CLOTHING
           </h1>
-          <ul className="flex gap-10 items-center font-medium">
+          <ul className="flex gap-4 sm:gap-8 md:gap-10 items-center font-medium text-sm sm:text-base">
             <HeaderItem text="Sair" onClick={() => signOutUser()} />
             <HeaderItem text="Explorar" onClick={() => navigate("/explore")} />
             <HeaderItem
               text="Carrinho"
               onClick={() => setIsCartOpen(true)}
-              icon={<ShoppingCart />}
+              icon={<ShoppingCart className="size-4 sm:size-5" />}
             />
           </ul>
         </div>

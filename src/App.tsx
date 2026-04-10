@@ -1,5 +1,5 @@
 import CategorySection from "./components/category-section";
-import Header from "./components/header";
+import Header from "./components/header/header";
 
 const App = () => {
   return (

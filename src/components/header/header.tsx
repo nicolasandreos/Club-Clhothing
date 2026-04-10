@@ -1,9 +1,9 @@
-import { ShoppingCart } from "lucide-react";
-import HeaderItem from "./header-item";
 import { useNavigate } from "react-router";
-import { useUser } from "../contexts/user-context";
+import { useUser } from "../../contexts/user-context";
 import { useState } from "react";
-import CartSheet from "./cart-sheet";
+import HeaderItem from "../header-item";
+import { ShoppingCart } from "lucide-react";
+import CartSheet from "../cart-sheet";
 
 const Header = () => {
   const navigate = useNavigate();

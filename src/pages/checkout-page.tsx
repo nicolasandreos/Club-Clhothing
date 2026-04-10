@@ -1,6 +1,6 @@
 import { useCart } from "../contexts/cart-context";
 import CartLineItem from "../components/cart-line-item";
-import Header from "../components/header";
+import Header from "../components/header/header";
 import { formattedPrice } from "../lib/utils";
 import { ShoppingCart } from "lucide-react";
 import Button from "../components/button";

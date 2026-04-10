@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { CategoryType } from "../../types/category-type";
-import Header from "../components/header";
+import Header from "../components/header/header";
 import { db } from "../integrations/firebase/initialize";
 import { collection, getDocs } from "firebase/firestore";
 import ProductsSection from "../components/products-section";

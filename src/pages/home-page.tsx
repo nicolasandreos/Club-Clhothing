@@ -1,5 +1,5 @@
 import CategorySection from "../components/category-section";
-import Header from "../components/header";
+import Header from "../components/header/header";
 import { useUser } from "../contexts/user-context";
 import { Navigate } from "react-router";
 

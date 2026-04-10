@@ -1,7 +1,7 @@
 import { FaGoogle } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
 import Button from "../components/button";
-import Input from "../components/input";
+import Input from "../components/input/input";
 import { useLoginForm } from "../form/hooks/use-login-form";
 import { Link } from "react-router";
 

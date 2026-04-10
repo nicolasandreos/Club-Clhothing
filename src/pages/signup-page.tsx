@@ -1,5 +1,5 @@
 import { FiLogIn } from "react-icons/fi";
-import Input from "../components/input";
+import Input from "../components/input/input";
 import { useSignupForm } from "../form/hooks/use-signup-form";
 import Button from "../components/button";
 import { Link } from "react-router";

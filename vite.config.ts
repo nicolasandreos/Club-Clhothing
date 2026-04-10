@@ -11,6 +11,11 @@ export default defineConfig({
     tailwindcss(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./jest.setup.js",
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

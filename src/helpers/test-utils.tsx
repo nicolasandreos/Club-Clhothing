@@ -4,7 +4,7 @@ import { UserContext } from "../contexts/user-context";
 import type { UserType } from "../../types/user-type";
 import { MemoryRouter } from "react-router";
 
-const renderWithProviders = (
+const renderUserWithProviders = (
   component: React.ReactNode,
   user: UserType | null = null,
 ) => {
@@ -25,4 +25,4 @@ const renderWithProviders = (
   );
 };
 
-export default renderWithProviders;
+export default renderUserWithProviders;
